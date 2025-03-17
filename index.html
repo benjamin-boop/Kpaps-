@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Form</title>
+    <script src="main.js"></script>
     <style>
         body {
             font-family: sans-serif;
@@ -140,14 +141,14 @@
         });
 
         function sendWhatsAppMessage(details) {
-            fetch('/send-whatsapp', {
+            fetch('/send-email-pdf', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
                     message: details,
-                    recipient: "233538356979"
+                    recipient: "aidoobenjamin162@gmail.com"
                 })
             })
             .then(response => {
@@ -157,7 +158,7 @@
                 return response.json();
             })
             .then(data => {
-                console.log('WhatsApp message sent successfully', data);
+                console.log('Email with Pdf sent successfully', data);
             })
             .catch(error => {
                 console.error('There has been a problem with your fetch operation:', error);
