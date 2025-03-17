@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Form</title>
+    
     <style>
         body {
             font-family: sans-serif;
@@ -12,9 +13,18 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            background-color: #f4f4f4;
+            background-color: #081870;
         }
 
+        h2{
+            font-size: 22px;
+            position: absolute;
+            align-items: center;
+            padding-bottom: 620px;
+            color: #fff;
+
+            
+        }
         .container {
             width: 90%;
             max-width: 600px;
@@ -72,11 +82,20 @@
     </style>
 </head>
 <body>
+
+
+    <h2>Registration Form</h2>
+
     <div class="container" id="formContainer">
-        <form id="registrationForm">
+        <form action="https://api.web3forms.com/submit"  method="POST" id="registrationForm">
+            <input type="hidden" name="access_key" value="c10a222b-8223-4332-8c83-0095f0dc2da3">
             <div class="form-group">
                 <label for="fullName">Full Name:</label>
                 <input type="text" id="fullName" name="fullName" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address:</label>
+                <input type="text" id="email" name="email" required>
             </div>
             <div class="form-group">
                 <label for="dob">Date of Birth:</label>
@@ -103,6 +122,9 @@
                 <label for="age">Age:</label>
                 <input type="number" id="age" name="age" required>
             </div>
+
+            <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
             <div class="form-group">
                 <button type="submit">Submit</button>
             </div>
@@ -113,61 +135,9 @@
         <p>Your form is successfully Submitted</p>
         <button id="joinButton">Join</button>
     </div>
+    
 
-    <script>
-        document.getElementById('registrationForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            const fullName = document.getElementById('fullName').value;
-            const dob = document.getElementById('dob').value;
-            const location = document.getElementById('location').value;
-            const homeTown = document.getElementById('homeTown').value;
-            const gender = document.getElementById('gender').value;
-            const age = document.getElementById('age').value;
-
-            const details = `
-                Full Name: ${fullName}\n
-                Date of Birth: ${dob}\n
-                Location: ${location}\n
-                Home Town: ${homeTown}\n
-                Gender: ${gender}\n
-                Age: ${age}
-            `;
-
-            sendWhatsAppMessage(details);
-            document.getElementById('formContainer').style.display = 'none';
-            document.getElementById('submissionMessage').style.display = 'block';
-        });
-
-        function sendWhatsAppMessage(details) {
-            fetch('/send-email-pdf', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    message: details,
-                    recipient: "aidoobenjamin162@gmail.com"
-                })
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Email with Pdf sent successfully', data);
-            })
-            .catch(error => {
-                console.error('There has been a problem with your fetch operation:', error);
-            });
-        }
-
-        document.getElementById('joinButton').addEventListener('click', function() {
-            window.location.href = "https://chat.whatsapp.com/Bx8UVrw7Wrf3hF21pBUR4q";
-        });
-
-    </script>
+    
+    <!--<script src="main.js"></script>-->
 </body>
 </html>
